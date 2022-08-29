@@ -17,4 +17,4 @@ const cat ={
 // square-bracket notation
 console.log(cat["name"])
 // dot notation
-console.log(cat.name)
+console.log(cat.name)   
