@@ -1,0 +1,43 @@
+#!/bin/bash
+
+echo "get all:"
+
+curl http://localhost:8080/weapons | jq
+
+echo "get one:"
+
+curl http://localhost:8080/weapons/1 | jq
+
+echo "post test"
+
+curl -X POST http://localhost:8080/weapons -H 'Content-Type: application/json' -d '{"name": "post", "description": "test"}'| jq
+
+echo "put test:"
+
+curl -X PUT http://localhost:8080/weapons/1 -H 'Content-Type: application/json' -d '{"name": "put", "description": "test"}'| jq
+
+echo "patch test:"
+
+curl -X PATCH http://localhost:8080/weapons/2 -H 'Content-Type: application/json' -d '{"description": "patch test"}'| jq
+
+echo "delete test:"
+
+curl -X DELETE http://localhost:8080/weapons/0
+
+echo "get error"
+
+curl http://localhost:8080/weapons/999
+
+echo "put error"
+
+curl -X PUT http://localhost:8080/weapons/999 -H 'Content-Type: application/json' -d '{"name": "put", "description": "test"}'| jq
+
+echo "patch error"
+
+curl -X PATCH http://localhost:8080/weapons/999 -H 'Content-Type: application/json' -d '{"description": "patch test"}'| jq
+
+echo "delete error"
+
+curl -X DELETE http://localhost:8080/weapons/999 | jq
+
+
