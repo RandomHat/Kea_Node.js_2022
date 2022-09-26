@@ -1,0 +1,7 @@
+Maven       vs.         NPM
+pom.xml                 package.json
+
+        Sections / Responsibilities
+Meta Data               Meta Data       // Versions kontrollering. eg. JDK version, Artefakt version, Artefakt name
+Dependencies            Dependencies
+Life cycles             Scripts         // Mavens lifecycles er en inddeling, som kan eksekverer kode på forskellige stadier eg. Test. I NPM hedder det Scripts.
