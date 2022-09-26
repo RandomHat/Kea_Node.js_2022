@@ -69,7 +69,8 @@ app.put("/weapons/:id", (req, res) => {
         weapon.description = req.body.description;
     }
     
-    res.send(weapon? wrapResponse(weapons[id]) : default404)
+    weapon? res.send( wrapResponse(weapons[id]))
+            : res.status.send(default404)
 })
 
 app.patch("/weapons/:id", (req, res) => {
@@ -82,17 +83,20 @@ app.patch("/weapons/:id", (req, res) => {
                 weapon[key] = value;
             }
         }
-        res.send(wrapResponse(weapons[id]));
+        res.status(200).send(wrapResponse(weapons[id]));
     } 
     else {
-        res.send(default404)
+        res.status(404).send(default404)
     }
 })
 
 app.delete("/weapons/:id", (req,res) => {
     let id = req.params.id;
 
-    res.send(weapons[id]? wrapResponse(weapons.splice(id, 1, undefined)[0]) : default404)
+    weapons[id] ? res.status(200).send(wrapResponse(weapons.splice(id, 1, undefined)[0])) 
+                : res.status(404).send(default404);
+    
+    //res.send(weapons[id]? wrapResponse(weapons.splice(id, 1, undefined)[0]) : default404)
 })
 
 app.listen(8080, () => console.log("Server started on port:", 8080));

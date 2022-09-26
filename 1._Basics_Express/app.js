@@ -35,7 +35,7 @@ app.get("/cups", (req, res) => {
 
 // 1.
 // path variables
-// /deers/{id] i spring
+// /deers/{id} i spring
 // /deers/:id i express
 
 // 2.
@@ -62,13 +62,30 @@ app.get ("/deers/:id", (req, res) => {
 
 // with query string
 
-app.get("/actors/", (req,res) =>{
+app.get("/actors", (req,res) =>{
     console.log(req.query.name)
     res.send({
         message: "Information about actor:",
         ...req.query
     })
 }) 
+
+// console.log(Date.now())
+// console.log(new Date())
+// console.log(new Date().toLocaleString())
+
+// const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] us week starts Sunday.
+
+app.get("/time", (req, res) => {
+    let date = new Date();
+    
+    res.send({data: {day: date.getDay(), month: date.getMonth()}})
+})
+
+app.post("/actors", (req, res) => {
+    console.log(req.body)
+    res.send({data: req.body})
+})
 
 
 // Set port, and start server. Best practise er at have den her i bunden. Det kan også give problemer at have app.listen() længere oppe i appen.

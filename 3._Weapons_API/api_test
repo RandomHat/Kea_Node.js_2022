@@ -22,11 +22,11 @@ curl -X PATCH http://localhost:8080/weapons/2 -H 'Content-Type: application/json
 
 echo "delete test:"
 
-curl -X DELETE http://localhost:8080/weapons/0
+curl -X DELETE http://localhost:8080/weapons/0 | jq
 
 echo "get error"
 
-curl http://localhost:8080/weapons/999
+curl http://localhost:8080/weapons/999 | jq
 
 echo "put error"
 
