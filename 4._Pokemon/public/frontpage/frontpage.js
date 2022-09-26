@@ -14,7 +14,7 @@ async function getPokemonAPI(url = '', data = {}){
 const pokemonDiv = document.getElementById("pokemon");
 
 // https://pokeapi.co/api/v2/pokemon now routing from own server
-fetch("/pokemon")
+fetch("/api/pokemon")
 .then(res => res.json())
 .then(result => {
     result.data.forEach((pokemon) => {

@@ -12,10 +12,14 @@ const app = express();
 app.use(express.static("public")); //Husk sikkerhedsfeature der ikke tillader implicit serving af filer, derfor skal vi altid beskrive hvor filer vi vil serve ligger.
 
 app.get("/", (req, res) => {
-    res.sendFile(path.resolve("public/frontpage.html"))  
+    res.sendFile(path.resolve("public/frontpage/frontpage.html"))  
 })
 
-app.get("/pokemon", (req,res) => {
+app.get("/battle", (req,res) => {
+    res.sendFile(path.resolve("public", "battle", "battle.html"))
+})
+
+app.get("/api/pokemon", (req,res) => {
     fetch("https://pokeapi.co/api/v2/pokemon", {method: "GET"}).then(res => res.json()).then(apires => res.send({data: apires.results}))
 })
 
