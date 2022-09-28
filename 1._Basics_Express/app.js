@@ -87,6 +87,20 @@ app.post("/actors", (req, res) => {
     res.send({data: req.body})
 })
 
+app.get("/lookunderthebed", (req,res) => {
+    /* assignment allow the user to define if they have a flashlight
+    if they do then send the response "You are safe"
+    if they don't then redirect them to /monsters
+    */
+
+    Boolean(req.query.flashlight) === true?
+        res.send({message: "you are safe"}) :
+        res.redirect("/monsters"); // Server side redirect
+})
+
+app.get("/monsters", (req,res) => {
+    res.send({message : "Uh oh! Scary monsters!!!"})
+})
 
 // Set port, and start server. Best practise er at have den her i bunden. Det kan også give problemer at have app.listen() længere oppe i appen.
 app.listen(8080, () => {
