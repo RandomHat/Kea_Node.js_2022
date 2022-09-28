@@ -103,5 +103,8 @@ dist
 # TernJS port file
 .tern-port
 
+# Deploy express-website assignment
+5._ClockWebsite
+
 # TeacherExample
 a._TeachersExample
