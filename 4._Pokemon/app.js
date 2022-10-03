@@ -1,6 +1,8 @@
 import express from "express"
 import path from "path"
 
+import {renderPage} from "./util/templateEngine.js"; //filesystem. Vi bruger readFileSync som er synkront, det er fint fordi vi kun kører koden ved serverstart.
+
 // Vi kunne sætte port  i miljøet.
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -9,18 +11,38 @@ const app = express();
 //console.log(process);
 //console.log(Number(process.env.PORT))
 
+
+
 app.use(express.static("public")); //Husk sikkerhedsfeature der ikke tillader implicit serving af filer, derfor skal vi altid beskrive hvor filer vi vil serve ligger.
 
+// SSR sandwich
+const frontpage = renderPage("/frontpage/frontpage.html", {tabTitle:"POKEMON HOME", cssLink : '/frontpage/frontpage.css'});
+
+const battle = renderPage("/battle/battle.html", {tabTitle:"%%TAB_TITLE%%", cssLink : '/battle/battle.css'});
+
+const contactpage = renderPage("/contact-page/contact-page.html", {tabTitle: "Provide Feedback", cssLink : '/contact-page/contact-page.css'});
+
+// end
+
 app.get("/", (req, res) => {
-    res.sendFile(path.resolve("public/pages/frontpage/frontpage.html"))  
+    res.send(frontpage);
+    //res.sendFile(path.resolve("public/pages/frontpage/frontpage.html"))  
 })
 
-app.get("/battle", (req,res) => {
-    res.sendFile(path.resolve("public", "pages", "battle", "battle.html"))
-})
+app.get("/battle", (req, res) => {
+    const randomPokemon = "pikachu";
+    res.redirect(`/battle/${randomPokemon}`);
+});
+
+app.get("/battle/:pokemonName", (req, res) => {
+    res.send(battle.replace("%%TAB_TITLE%%", `Battle ${req.params.pokemonName}`))
+    //res.send(battleSandwich.replace("%%TAB_TITLE%%", `Battle ${req.params.pokemonName}`))
+    //res.sendFile(path.resolve("public/pages/battle/battle.html"));
+});
 
 app.get("/contact", (req,res) => {
-    res.sendFile(path.resolve("public", "pages", "contact-page", "contact-page.html"))
+    res.send(contactpage)
+    //res.sendFile(path.resolve("public", "pages", "contact-page", "contact-page.html"))
 })
 
 app.get("/api/pokemon", (req,res) => {
