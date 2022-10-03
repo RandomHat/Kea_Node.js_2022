@@ -12,11 +12,15 @@ const app = express();
 app.use(express.static("public")); //Husk sikkerhedsfeature der ikke tillader implicit serving af filer, derfor skal vi altid beskrive hvor filer vi vil serve ligger.
 
 app.get("/", (req, res) => {
-    res.sendFile(path.resolve("public/frontpage/frontpage.html"))  
+    res.sendFile(path.resolve("public/pages/frontpage/frontpage.html"))  
 })
 
 app.get("/battle", (req,res) => {
-    res.sendFile(path.resolve("public", "battle", "battle.html"))
+    res.sendFile(path.resolve("public", "pages", "battle", "battle.html"))
+})
+
+app.get("/contact", (req,res) => {
+    res.sendFile(path.resolve("public", "pages", "contact-page", "contact-page.html"))
 })
 
 app.get("/api/pokemon", (req,res) => {
